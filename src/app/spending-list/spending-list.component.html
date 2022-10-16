@@ -1,0 +1,46 @@
+<div [id]="spendingList.ID" class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2>
+        {{ spendingList.name }}
+      </h2>
+    </div>
+
+    <div class="col-12">
+      <input
+        type="number"
+        id="balance-item-value"
+        placeholder="Balance Item Value"
+      />
+
+      <input
+        type="text"
+        id="balance-item-name"
+        placeholder="Balance Item Name"
+      />
+    </div>
+
+    <div class="col-12">
+      <ul
+        *ngIf="
+          spendingList.list && spendingList.list.length;
+          else noSpendingMessage
+        "
+      >
+        <li *ngFor="let item of spendingList.list">
+          {{ item }}
+        </li>
+      </ul>
+
+      <ng-template #noSpendingMessage>
+        No spendings on the list...
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<p>List in spending-list component:</p>
+
+<pre
+  >{{ spendingList | json }}
+</pre>

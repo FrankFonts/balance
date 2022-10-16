@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SpendingList, spendings } from './interfaces';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  title = 'balance';
+export class AppComponent implements OnInit {
+  spendings: Array<SpendingList> = spendings;
+
+  ngOnInit(): void {}
 }
