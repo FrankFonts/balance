@@ -1,12 +1,12 @@
 export interface SpendingList {
   name: string;
   ID: number | string;
-  list?: Array<SpendingItem>;
+  list: Array<SpendingItem>;
 }
 
 export interface SpendingItem {
-  balanceItemValue: number;
-  balanceItemName: string;
+  spendingItemValue: number;
+  spendingItemName: string;
 }
 
 export const spendings: Array<SpendingList> = [

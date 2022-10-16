@@ -1,16 +1,13 @@
 <div class="container">
   <div class="row">
+    <div class="col-12 page__title">
+      <h1>Balance Calculator</h1>
+    </div>
     <app-spending-list
       *ngFor="let spendingList of spendings"
       [spendingList]="spendingList"
-      class="col-12 col-md-6"
+      (spendingListChange)="updateSpendingList($event)"
+      class="col-12 col-md-6 spending-list"
     ></app-spending-list>
-  </div>
-  <div class="col-12">
-    <p>Lists in app component:</p>
-    <pre>
-      {{ spendings | json }}
-      </pre
-    >
   </div>
 </div>

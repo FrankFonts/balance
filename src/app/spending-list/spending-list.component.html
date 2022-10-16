@@ -1,46 +1,69 @@
-<div [id]="spendingList.ID" class="container">
-  <div class="row">
-    <div class="col-12">
-      <h2>
-        {{ spendingList.name }}
-      </h2>
-    </div>
+<!-- <div [id]="spendingList.ID"> -->
+<div class="row">
+  <div class="col-12">
+    <h2>
+      {{ spendingList.name }}
+    </h2>
+  </div>
 
-    <div class="col-12">
-      <input
-        type="number"
-        id="balance-item-value"
-        placeholder="Balance Item Value"
-      />
+  <div class="col-4">
+    <input
+      #spendingItemValueInput
+      class="newItem"
+      type="number"
+      placeholder="Amount"
+      [value]="spendingItemValue"
+      (keypress)="
+        addNewSpendingListItem(
+          $event,
+          spendingItemValueInput.value,
+          spendingItemNameInput.value
+        )
+      "
+    />
+  </div>
 
-      <input
-        type="text"
-        id="balance-item-name"
-        placeholder="Balance Item Name"
-      />
-    </div>
-
-    <div class="col-12">
-      <ul
-        *ngIf="
-          spendingList.list && spendingList.list.length;
-          else noSpendingMessage
-        "
-      >
-        <li *ngFor="let item of spendingList.list">
-          {{ item }}
-        </li>
-      </ul>
-
-      <ng-template #noSpendingMessage>
-        No spendings on the list...
-      </ng-template>
-    </div>
+  <div class="col-8">
+    <input
+      #spendingItemNameInput
+      class="newItem"
+      type="text"
+      placeholder="Description"
+      [value]="spendingItemName"
+      (keypress)="
+        addNewSpendingListItem(
+          $event,
+          spendingItemValueInput.value,
+          spendingItemNameInput.value
+        )
+      "
+    />
   </div>
 </div>
 
-<p>List in spending-list component:</p>
+<div
+  class="row"
+  *ngIf="spendingList.list && spendingList.list.length; else noSpendingMessage"
+>
+  <ng-container *ngFor="let item of spendingList.list">
+    <!-- disabled for now -->
+    <div class="col-4">
+      <input type="number" disabled [value]="item.spendingItemValue" />
+    </div>
 
-<pre
-  >{{ spendingList | json }}
-</pre>
+    <!-- disabled for now -->
+    <div class="col-8">
+      <input type="text" disabled [value]="item.spendingItemName" />
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #noSpendingMessage> No spendings on the list... </ng-template>
+
+<!-- TODO : move out to app -->
+<div
+  *ngIf="spendingList.list && spendingList.list.length"
+  class="col-12 list__total"
+>
+  <h3>Total: {{ calculateTotal() | currency: "HUF":"":"4.0-0" }}.- Ft</h3>
+</div>
