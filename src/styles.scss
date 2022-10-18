@@ -1,12 +1,24 @@
+body {
+  padding-bottom: 100vh;
+}
+
+.spending-list {
+  margin-bottom: 3rem;
+}
+
 input {
   width: 100%;
-  margin: 0 0 1em 0;
+  margin: 0 0 0.2em 0;
   border: 0;
   border-bottom: 2px solid currentColor;
   transition: all 200ms ease-in-out;
   position: relative;
   background-color: transparent;
   outline: none;
+
+  &.new-item {
+    margin-bottom: 2em;
+  }
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -20,6 +32,32 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+.page__title {
+  margin: 2em 0;
+}
+.list__total {
+  margin: 2em 0 0 0;
+}
+
+.balance {
+  width: 100%;
+  height: auto;
+  position: fixed;
+  z-index: 1000;
+  bottom: 0;
+  left: 0;
+  padding: 0;
+
+  h2 {
+    border-top: 1px solid currentColor;
+    padding: 0.4em 0;
+
+    &.padded--bottom {
+      padding-bottom: 1em;
+    }
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #111;
@@ -29,10 +67,19 @@ input[type="number"] {
   input {
     color: #444;
 
+    &:disabled {
+      color: #444;
+
+      &:hover {
+        color: #444;
+      }
+    }
+
     &::placeholder {
       color: #444;
     }
 
+    &:hover,
     &:focus {
       color: inherit;
 
@@ -40,6 +87,11 @@ input[type="number"] {
         color: inherit;
       }
     }
+  }
+
+  .balance {
+    background-color: #000;
+    color: #fff;
   }
 }
 
@@ -52,10 +104,19 @@ input[type="number"] {
   input {
     color: #ccc;
 
+    &:disabled {
+      color: #ccc;
+
+      &:hover {
+        color: #ccc;
+      }
+    }
+
     &::placeholder {
       color: #ccc;
     }
 
+    &:hover,
     &:focus {
       color: inherit;
 
@@ -64,11 +125,8 @@ input[type="number"] {
       }
     }
   }
-}
-
-.page__title {
-  margin: 2em 0;
-}
-.list__total {
-  margin: 2em 0 0 0;
+  .balance {
+    background-color: #fff;
+    color: #000;
+  }
 }

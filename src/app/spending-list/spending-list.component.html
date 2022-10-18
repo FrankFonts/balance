@@ -1,4 +1,3 @@
-<!-- <div [id]="spendingList.ID"> -->
 <div class="row">
   <div class="col-12">
     <h2>
@@ -9,7 +8,7 @@
   <div class="col-4">
     <input
       #spendingItemValueInput
-      class="newItem"
+      class="new-item"
       type="number"
       placeholder="Amount"
       [value]="spendingItemValue"
@@ -26,7 +25,7 @@
   <div class="col-8">
     <input
       #spendingItemNameInput
-      class="newItem"
+      class="new-item"
       type="text"
       placeholder="Description"
       [value]="spendingItemName"
@@ -59,11 +58,10 @@
 </div>
 
 <ng-template #noSpendingMessage> No spendings on the list... </ng-template>
-
-<!-- TODO : move out to app -->
+<!--
 <div
   *ngIf="spendingList.list && spendingList.list.length"
   class="col-12 list__total"
 >
-  <h3>Total: {{ calculateTotal() | currency: "HUF":"":"0.0-0" }}.- Ft</h3>
-</div>
+  <h3>Total: {{ spendingList.listTotal | currency: "HUF":"":"0.0-0" }}.- Ft</h3>
+</div> -->

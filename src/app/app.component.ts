@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SpendingList, spendings } from './interfaces';
+import { SpendingList, SpendingItem } from './interfaces';
 
 @Component({
   selector: 'app-root',
@@ -7,17 +7,29 @@ import { SpendingList, spendings } from './interfaces';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  spendings: Array<SpendingList> | null = spendings;
+  spendings: Array<SpendingList> = [
+    {
+      name: '',
+      list: [],
+      listTotal: 0,
+    },
+  ];
 
   updateSpendingList(spendingList: SpendingList) {
     localStorage.setItem('balance-app-data', JSON.stringify(this.spendings));
   }
 
   constructor() {
-    let test: string | null = localStorage.getItem('balance-app-data');
+    let savedSpendings: string | null =
+      localStorage.getItem('balance-app-data');
 
-    if (test) {
-      this.spendings = JSON.parse(test);
+    if (savedSpendings) {
+      this.spendings = JSON.parse(savedSpendings);
+    } else {
+      this.spendings = [
+        { name: 'Marcsi', list: [], listTotal: 0 },
+        { name: 'Béci', list: [], listTotal: 0 },
+      ];
     }
   }
 

@@ -7,7 +7,16 @@ import { SpendingList, SpendingItem } from '../interfaces';
   styleUrls: ['./spending-list.component.scss'],
 })
 export class SpendingListComponent implements OnInit {
-  @Input() spendingList: SpendingList = { name: '', ID: 0, list: [] };
+  @Input() spendingList: SpendingList = {
+    name: '',
+    list: [],
+    listTotal: 0,
+  };
+  @Input() listTotal: number | undefined;
+
+  @Output() spendingListChange = new EventEmitter<SpendingList>();
+
+  
 
   spendingItemValue: string = '';
   spendingItemName: string = '';
@@ -18,38 +27,33 @@ export class SpendingListComponent implements OnInit {
   }
 
   addNewSpendingListItem(event: KeyboardEvent, value: string, name: string) {
+    // update data
     this.spendingItemValue = value.trim();
     this.spendingItemName = name.trim();
 
-    if (
-      event.key == 'Enter' &&
-      this.spendingItemName !== '' &&
-      this.spendingItemValue !== ''
-    ) {
+    if (event.key == 'Enter' && this.spendingItemValue !== '') {
       this.spendingList.list.push({
         spendingItemValue: +this.spendingItemValue || 0,
         spendingItemName: this.spendingItemName || '',
       });
+      this.spendingList.listTotal = this.calculateTotal(this.spendingList);
 
+      // emit updated list
+      this.spendingListChange.emit(this.spendingList);
+
+      // reset values
       this.spendingItemValue = '';
       this.spendingItemName = '';
-
-      this.spendingListChange.emit(this.spendingList);
     }
   }
 
-  calculateTotal() {
-    let sum = this.spendingList.list.reduce(
-      (total: number, item: SpendingItem) => {
-        return (total += item.spendingItemValue);
-      },
-      0
-    );
+  calculateTotal(spendingList: SpendingList) {
+    let sum = spendingList.list.reduce((total: number, item: SpendingItem) => {
+      return (total += item.spendingItemValue);
+    }, 0);
 
     return sum;
   }
-
-  @Output() spendingListChange = new EventEmitter<SpendingList>();
 
   constructor() {}
 

@@ -1,0 +1,27 @@
+<div class="container-fluid balance">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <h2>
+          {{ this.spendings[0].name }}
+          {{ this.spendings[0].listTotal | currency: "HUF":"":"0.0-0" }}.- Ft
+        </h2>
+      </div>
+      <div class="col-12 col-md-6">
+        <h2>
+          {{ this.spendings[1].name }}
+          {{ this.spendings[1].listTotal | currency: "HUF":"":"0.0-0" }}.- Ft
+        </h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h2 class="padded--bottom">
+          The balance is
+          {{ calculateBalance() | currency: "HUF":"":"0.0-0" }}.- Ft for
+          {{ calculatePerson() }}
+        </h2>
+      </div>
+    </div>
+  </div>
+</div>
