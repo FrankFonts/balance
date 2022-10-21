@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SpendingList, SpendingItem } from './interfaces';
+import { SpendingList } from './interfaces';
+import { Data, CrudService } from './shared/crud.service';
 
 @Component({
   selector: 'app-root',
@@ -7,19 +8,13 @@ import { SpendingList, SpendingItem } from './interfaces';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  spendings: Array<SpendingList> = [
-    {
-      name: '',
-      list: [],
-      listTotal: 0,
-    },
-  ];
+  spendings?: Array<SpendingList>;
 
   updateSpendingList(spendingList: SpendingList) {
     localStorage.setItem('balance-app-data', JSON.stringify(this.spendings));
   }
 
-  constructor() {
+  constructor(public crudService: CrudService) {
     let savedSpendings: string | null =
       localStorage.getItem('balance-app-data');
 
@@ -33,5 +28,34 @@ export class AppComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  //
+  //
+  // testing simple http requests
+  // moving data to https://jsonbin.io
+  //
+  ngOnInit(): void {
+    this.getData();
+  }
+
+  myData!: Data;
+
+  //
+  // testing http GET as service
+  //
+  getData() {
+    return this.crudService.getData().subscribe((res) => {
+      this.myData = res;
+    });
+  }
+
+  //
+  // testing http GET as service
+  //
+  updateData() {
+    if (window.confirm('Yes, please...')) {
+      this.crudService.updateData(this.myData.record).subscribe((res) => {
+        console.log(`Data has been sent: ` + res);
+      });
+    }
+  }
 }

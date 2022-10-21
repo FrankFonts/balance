@@ -1,18 +1,37 @@
-<div class="container">
+<!-- <pre>
+  {{ myData | json }}
+</pre> -->
+
+<div *ngIf="myData; else loading" class="container">
+  <div class="row">
+    <div class="col-12">
+      <button type="button" class="btn btn-primary" (click)="updateData()">
+        Test Save Data
+      </button>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-12 page__title">
       <h1>Spendings Calculator</h1>
     </div>
     <app-spending-list
-      *ngFor="let spendingList of spendings"
+      *ngFor="let spendingList of myData.record"
       [spendingList]="spendingList"
       (spendingListChange)="updateSpendingList($event)"
       class="col-12 col-md-6 spending-list"
     ></app-spending-list>
 
-    <app-calculate-balance [spendings]="spendings"></app-calculate-balance>
+    <app-calculate-balance
+      [spendings]="myData.record || undefined"
+    ></app-calculate-balance>
   </div>
 </div>
+
+<ng-template #loading>
+  <div class="container"></div>
+  The application is loading
+</ng-template>
 
 <!-- <pre>
   {{ spendings | json }}
