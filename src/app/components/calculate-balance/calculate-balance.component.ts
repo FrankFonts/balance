@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SpendingList } from '../interfaces';
+import { SpendingList } from '../../interfaces';
 
 @Component({
   selector: 'app-calculate-balance',
@@ -44,7 +44,6 @@ export class CalculateBalanceComponent implements OnInit {
   personTwo: string = '';
 
   ngOnInit(): void {
-
     if (this.spendings) {
       this.personOne = this.spendings[0].name;
       this.personTwo = this.spendings[0].name;

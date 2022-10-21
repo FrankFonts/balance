@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SpendingList, SpendingItem } from '../interfaces';
+import { SpendingList, SpendingItem } from '../../interfaces';
 
 @Component({
   selector: 'app-spending-list',
@@ -15,8 +15,6 @@ export class SpendingListComponent implements OnInit {
   @Input() listTotal: number | undefined;
 
   @Output() spendingListChange = new EventEmitter<SpendingList>();
-
-  
 
   spendingItemValue: string = '';
   spendingItemName: string = '';

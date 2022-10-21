@@ -3,13 +3,13 @@
 </pre> -->
 
 <div *ngIf="myData; else loading" class="container">
-  <div class="row">
-    <div class="col-12">
-      <button type="button" class="btn btn-primary" (click)="updateData()">
-        Test Save Data
-      </button>
-    </div>
-  </div>
+  <button
+    type="button"
+    class="btn btn-primary save-button"
+    (click)="updateData()"
+  >
+    Save
+  </button>
 
   <div class="row">
     <div class="col-12 page__title">
@@ -28,9 +28,10 @@
   </div>
 </div>
 
-<ng-template #loading>
-  <div class="container"></div>
-  The application is loading
+<ng-template #loading let-loadingMessage="loadingMessage">
+  <div class="loading-container">
+    <h2>Hold on, we are loading your data...</h2>
+  </div>
 </ng-template>
 
 <!-- <pre>

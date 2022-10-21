@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12">
-    <h2>
+    <h2 class="person-name">
       {{ spendingList.name }}
     </h2>
   </div>
@@ -10,7 +10,7 @@
       #spendingItemValueInput
       class="new-item"
       type="number"
-      placeholder="Amount"
+      placeholder="New item value"
       [value]="spendingItemValue"
       (keypress)="
         addNewSpendingListItem(
@@ -27,7 +27,7 @@
       #spendingItemNameInput
       class="new-item"
       type="text"
-      placeholder="Description"
+      placeholder="New item description"
       [value]="spendingItemName"
       (keypress)="
         addNewSpendingListItem(
